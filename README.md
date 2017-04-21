@@ -5,10 +5,12 @@ Folder Eample contains compiled Jar and a demo Config,
 attention, you have to adjust path inside demo COnfig!
 
 This is the way to execute this programm:
+```
 java -jar ('path')\hiesp.jar ('path')\hiesp1.conf
+```
 
 Config is written and parsed as Json object: here is an example:
-
+```
 {
   "debug": true,
   "Path": "D:\\Alexey\\Hiesp-Jar\\hiespConfig\\",
@@ -26,3 +28,4 @@ Config is written and parsed as Json object: here is an example:
     4
   ]
 }
+```
