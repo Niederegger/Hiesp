@@ -1,29 +1,35 @@
 package start;
 
 /**
- * @author Alexey Gasevic 
+ * @author Alexey Gasevic
  */
 public class Link {
-	public String url;		// Url of this link
-	public String rel;		// The Clickable Text of this Link (seen at website)
-	public String rawDate;	// Raw Date of this rel
-	public String date;		// Formatted Date
+	public String url; // Url of this link
+	public String rel; // The Clickable Text of this Link (seen at website)
+	public String rawDate; // Raw Date of this rel
+	public String date; // Formatted Date
 
 	public Link() {
 	}
 
+	/**
+	 * erstellt ein object link, welches einer url einen Text zuweißt, welcher
+	 * auf einer website zu finden ist
+	 * 
+	 * @param url
+	 * @param rel
+	 */
 	public Link(String url, String rel) {
 		this.url = url;
 		this.rel = rel;
-		rawDate = BasicFunctions.match(rel, start.config.DateRegex);
+		rawDate = BasicFunctions.match(rel, Loader.config.DateRegex);
 		System.out.println(rawDate);
 		convertDate();
 	}
 
 	/**
-	 * this function converts raw date into 
-	 * ordered date, 
-	 * setup for order is contained in Config
+	 * this function converts raw date into ordered date, setup for order is
+	 * contained in Config
 	 */
 	void convertDate() {
 		if (rawDate != null) {
@@ -31,8 +37,8 @@ public class Link {
 			if (snipped.length > 0) {
 				date = "";
 				String s;
-				for(int i : start.config.dateOrder){
-					if(i >= 0 && i < snipped.length){
+				for (int i : Loader.config.dateOrder) {
+					if (i >= 0 && i < snipped.length) {
 						s = snipped[i];
 						if (s.contains(":"))
 							s = s.replace(':', '_');

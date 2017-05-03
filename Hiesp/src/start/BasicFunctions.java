@@ -20,7 +20,7 @@ public class BasicFunctions {
 	 * @return
 	 */
 	public static String getStorePath(Link l) {
-		return start.config.Path + getFileName(l);
+		return Loader.config.Path + getFileName(l);
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class BasicFunctions {
 	 * @return
 	 */
 	public static String getFileName(Link l) {
-		return start.config.FileName + "_" + l.date + start.config.Ending;
+		return Loader.config.FileName + "_" + l.date + Loader.config.Ending;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class BasicFunctions {
 	 *            - pattern
 	 */
 	public static String match(String message, String regex) {
-		Pattern p = Pattern.compile(regex);
+		Pattern p = Pattern.compile(regex); 
 		Matcher m = p.matcher(message);
 		if (m.find()) {
 			return m.group(0);
@@ -87,15 +87,15 @@ public class BasicFunctions {
 	 * @return boolean
 	 */
 	public static boolean containsFile(String path, String file) {
-		File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if (listOfFiles[i].isFile()) {
-				if (listOfFiles[i].getName().equals(file))
-					return true;
+		File folder = new File(path); // hole mir diesen order des Pfades
+		File[] listOfFiles = folder.listFiles(); // hole mir alle Dateien aus diesem Pfad
+		for (int i = 0; i < listOfFiles.length; i++) {	// schau dir all diese Dateien an
+			if (listOfFiles[i].isFile()) { // falls die Datei eine Datei ist
+				if (listOfFiles[i].getName().equals(file)) // und genauso heisst wie die gewünschte Datei
+					return true; // wird true ausgegeben
 			}
 		}
-		return false;
+		return false; // ansonsten false
 	}
 	
 //	/**
@@ -124,7 +124,7 @@ public class BasicFunctions {
 	public static boolean checkConfigPath(String path){
 		if(path.endsWith(".conf")){
 			File f = new File(path);
-			return (f.exists() && !f.isDirectory());
+			return (f.exists() && !f.isDirectory()); // ist diese File eine File und kein Ordner
 		}
 		return false;
 	}

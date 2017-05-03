@@ -26,13 +26,13 @@ public class Download {
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 */
-	public void saveUrl(final String filename, final String urlString) throws MalformedURLException, IOException {
-		BufferedInputStream in = null;
-		FileOutputStream fout = null;
+	public static void saveUrl(final String filename, final String urlString) throws MalformedURLException, IOException {
+		BufferedInputStream in = null; // download stream
+		FileOutputStream fout = null; // schreibe stream
 		try {
-			in = new BufferedInputStream(new URL(urlString).openStream());
-			fout = new FileOutputStream(filename);
-			final byte data[] = new byte[1024];
+			in = new BufferedInputStream(new URL(urlString).openStream()); // oeffne dendownload stream
+			fout = new FileOutputStream(filename);	// oeffne den schreibe stream fuer die file 
+			final byte data[] = new byte[1024]; 
 			int count;
 			while ((count = in.read(data, 0, 1024)) != -1) {
 				fout.write(data, 0, count);
@@ -60,16 +60,16 @@ public class Download {
 	 *            ending or url
 	 * @return array of wanted Links from Url
 	 */
-	public Link[] grabLink(String url, String regex, String ending) {
+	public static Link[] grabLink(String url, String regex, String ending) {
 		Vector<Link> LinkArray = new Vector<Link>();
 		BasicFunctions.print("Fetching %s...", url);
 		Document doc;
 		try {
 			doc = Jsoup.connect(url).get();
 			Elements links = doc.select("a[href]");										// hohlt alle Elemente vom Typ a[href]
-			String currentRel; 	// current Text of URL
-			String curl;		// current URL
-			Pattern p = Pattern.compile(regex);	// pattern used to match Text
+			String currentRel; 															// current Text of URL
+			String curl;																// current URL
+			Pattern p = Pattern.compile(regex);											// pattern used to match Text
 			for (Element link : links) {												// geht alle Elemente durch
 				currentRel = link.text();	
 				curl = link.attr("abs:href");
