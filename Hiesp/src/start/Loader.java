@@ -18,8 +18,9 @@ public class Loader {
 			System.err.println("Use this Programm like this: java -jar hiesp.jar "		//   wenn nicht, wird eine Error-Message geprintet
 					+ "'Path of config'. Config Files end have the eding .conf");		// 
 			return;																		//   und das Programm beendet
-		} else {																		// -> ansonsten
-			String file =  args[0];														// lese den Pfad aus
+		} 
+		else {																		// -> ansonsten
+			String file = args[0]; //"D:\\Alexey\\EclipseWorkspace\\Hiesp\\Configs\\test.conf"; // 														// lese den Pfad aus
 			if(BasicFunctions.checkConfigPath(file)){									// UeberPruefe ob dieser Pfad Ok ist
 				if(loadConfig(file)){													// falls der PFad korrekt ist, lade diese Config, und Ueberpruefe ob diese ebenfalls korrekt ist
 					HIESP();															// die Config wurde geladen und beinhaltet das richtige Fromat, nun kann der Download beginnen
@@ -27,14 +28,14 @@ public class Loader {
 					System.err.println("This Config file doesn't fit the definition.");	// die Config beinhaltet ein falsches Format, ein Error wird geprintet
 				}																		//
 			} else {																	//
-				System.err.println("This Config file doesn't exists: " + file+".");		// der Pfad war nicht korrekt, ein Error wird geprintet
+				System.err.println("This Config file doesn't exists: " + file+".");		 
 			}
 		}
 	}
 
 	/**
 	 * HIESP ist der ablauf vom filtern aller links einer Webseite
-	 * bis hin zum Download der gewünschten file
+	 * bis hin zum Download der gewuenschten file
 	 */
 	public static void HIESP() {
 		Link[] links = Download.grabLink(config.WebSite, config.Rel, config.Ending); 	// hier werden alle Links der Website herausgefiltert
@@ -63,7 +64,7 @@ public class Loader {
 	}
 
 	/**
-	 * Aus optischen Gründen wurde diese Methode aus der Main extrahiert
+	 * Aus optischen Gruenden wurde diese Methode aus der Main extrahiert
 	 * diese funktion ladet den ersten Link innerhalb des LinkArrays runter
 	 * @param file - der Dateipfad
 	 */

@@ -91,7 +91,7 @@ public class BasicFunctions {
 		File[] listOfFiles = folder.listFiles(); // hole mir alle Dateien aus diesem Pfad
 		for (int i = 0; i < listOfFiles.length; i++) {	// schau dir all diese Dateien an
 			if (listOfFiles[i].isFile()) { // falls die Datei eine Datei ist
-				if (listOfFiles[i].getName().equals(file)) // und genauso heisst wie die gewünschte Datei
+				if (listOfFiles[i].getName().equals(file)) // und genauso heisst wie die gewuenschte Datei
 					return true; // wird true ausgegeben
 			}
 		}
