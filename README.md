@@ -11,7 +11,7 @@ You can find a precompiled version here: 'Loader/loader/preCompiled/'. Follow th
 3. Adjust your config file (more information down below). // take your time to setup the config correctly
 4. Execute: 
 ```
-...>java -jar Loader.jar hiesp.conf
+...>java -jar Loader.jar loaderAlleHandelbareInstrumente.conf
 ```
 
 ## API Reference
