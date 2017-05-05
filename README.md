@@ -25,8 +25,8 @@ Die Installation ist wie folgt auszuführen.
 
 ## API Reference
 
-- Gson: laden der Config-File (Json-Format)
-- Jsoup: parsen von HTML
+- Gson: working with config file (it's written as  a Json-Object)
+- Jsoup: parsing of HTML
 
 ## Tests
 
