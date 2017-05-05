@@ -60,5 +60,5 @@ Definition of these Values:
 | dateOrder  | changes the date order, you can choose whether it's yyyymmdd or ddmmyyy |
 
 Attention! : 
-- since this program is written in Java, you have to use doubled backslashes instead of single ones, cause it's an escape character in Java.
+- Since this program is written in Java, you have to use doubled backslashes instead of single ones, cause it's an escape character in Java.
 - Be carefull with special characters like: { ä, ö, ü, Ä, Ö, Ü} when using regex. It's recommended to test your Regex in a simple Java program, runnning from console before using your Regex with this program.
