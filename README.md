@@ -8,19 +8,10 @@ This project is supposed to be used as a download tool. Loader listens to Config
 You can find a precompiled version here: 'Loader/loader/preCompiled/'. Follow the next steps to run this program:
 1. Use the precompiled Jar or compile your own one.
 2. Choose a directory for your downloads.
-3. Adjust your config file (more information down below).
+3. Adjust your config file (more information down below). // take your time to setup the config correctly
 4. Execute: 
 ```
 ...>java -jar Loader.jar hiesp.conf
-```
-
-Es liegt eine pre- kompilierte Jar im Verzeichnis: "". Diese kann genutzt werden um das Programm auszuführen.
-Die Installation ist wie folgt auszuführen.
-1. Nutzen Sie die bereits kompilierte Jar oder kompilieren diese selbst.
-2. Wählen Sie ein Arveitsverzeichnis und ein Verzeichnis wo ihr Download hin soll.
-3. Passen Sie das Verzeichnis in der Config File an (ein Beispiel einer Config liegt in: "Loader/loader/preCompiled/Config/alleHandelbareInstrumente.conf") an folgender Stelle an:
-```
-"Path": "D:\\ExampleUser\\ExampleLoader\\Destination\\",
 ```
 
 ## API Reference
