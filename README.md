@@ -1,5 +1,5 @@
 # Loader
-## Synopsisand Motivation
+## Synopsis and Motivation
 
 This project is supposed to be used as a download tool. Loader listens to Config dependencies. You are able to adjust the Path, RelRegex (more informations later on), etc.. from within the config file, without needing to adjust your code or recompile anything.
 
