@@ -25,9 +25,9 @@ Xetra (XETR): 05 Mai 2017 02:00
 Börse Frankfurt (XFRA): 05 Mai 2017 01:58
 ```
 - Hier ist das passende Regex Beispiel:
-´´´
+```
   "Rel": "\\s*(Alle handelbaren Instrumente exklusive strukturierte Produkte\\sXetra \\(XETR\\):\\s*\\d\\d [a-zA-Z]+ \\d\\d\\d\\d \\d\\d:\\d\\d)\\s(B\\p{L}rse Frankfurt \\(XFRA\\):\\s*\\d\\d [a-zA-Z]+ \\d\\d\\d\\d \\d\\d:\\d\\d)\s*",
-´´´
+```
 'Achtumg:!' Backslash muss jeweils immer doppelt angegeben werden, da es sich um ein Java Programm handelt und Backslash in Java ein escape Zeichen ist. Außerdem ist auf Sonderzeichen wie Umlaut zu achten. Wie Sie sehen wird so aus Börse -> B\\p{L}rse.
 5. Passen Sie das File-Ending an, ist Ihre Datei eine csv Datei so geben sie das passend an:
 ´´´
