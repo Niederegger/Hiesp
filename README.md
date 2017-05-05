@@ -1,10 +1,27 @@
-# Hiesp
-Handelbaren Instrumente exklusive strukturierte Produkte
+# Loader
+## Synopsis
 
-Folder Eample contains compiled Jar and a demo Config,
-attention, you have to adjust path inside demo COnfig!
+Dieses Project dient dem Zweck Dateien von Websiten zu laden. Um die relativ flexible zu gestalten wird es über eine Config-File gesteuert.
 
-This is the way to execute this programm:
+## Motivation
+
+A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+
+## Installation
+
+todo
+
+## API Reference
+
+- Gson: laden der Config-File (Json-Format)
+- Jsoup: parsen von HTML
+
+## Tests
+
+todo
+
+## Config
+
 ```
 java -jar ('path')\hiesp.jar ('path')\hiesp1.conf
 ```
