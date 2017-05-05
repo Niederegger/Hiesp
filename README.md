@@ -46,6 +46,7 @@ Config is written as a Json-Object, here is an example:
 }
 ```  
 Definition of these Values:
+
 | variable      | explanation |
 | ------------- | --------- |
 | debug | switches some prints on and off (debug prints) |
