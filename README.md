@@ -1,59 +1,31 @@
 # Loader
-## Synopsis
+## Synopsis and Motivation
 
-Dieses Project dient dem Zweck Dateien von Websiten zu laden. Um die relativ flexible zu gestalten wird es über eine Config-File gesteuert.
-
-## Motivation
-
-Um nicht für jede Anforderung specielle Programme schreiben zu müssen wurde dieses Programm erstellt. Die Idee ist es das gewünschte Download Ziel über ein Regex auf der Seite zu Filtern. Durch die Steuerung über eine Config erspart man sich einiges an Compilieren.
+This project is supposed to be used as a download tool. Loader listens to Config dependencies. You are able to adjust the Path, RelRegex (more informations later on), etc.. from within the config file, without needing to adjust your code or recompile anything.
 
 ## Installation
 
-Es liegt eine pre- kompilierte Jar im Verzeichnis: "Loader/loader/preCompiled/". Diese kann genutzt werden um das Programm auszuführen.
-Die Installation ist wie folgt auszuführen.
-1. Nutzen Sie die bereits kompilierte Jar oder kompilieren diese selbst.
-2. Wählen Sie ein Arveitsverzeichnis und ein Verzeichnis wo ihr Download hin soll.
-3. Passen Sie das Verzeichnis in der Config File an (ein Beispiel einer Config liegt in: "Loader/loader/preCompiled/Config/alleHandelbareInstrumente.conf") an folgender Stelle an:
+You can find a precompiled version here: 'Loader/loader/preCompiled/'. Follow the next steps to run this program:
+1. Use the precompiled Jar or compile your own one.
+2. Choose a directory for your downloads.
+3. Adjust your config file (more information down below). // take your time to setup the config correctly
+4. Execute: 
 ```
-"Path": "D:\\ExampleUser\\ExampleLoader\\Destination\\",
+...>java -jar Loader.jar loaderAlleHandelbareInstrumente.conf
 ```
-4. Anschließend muss ein Regex erstellt werden, anhand dessen der Download-Link auf der Webseite gefunden werden kann, hier ein Beispiel:
-- Dieser Text befindet sich auf der Seite http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt, wobei sich das Datum täglich ändert.
-```
-Alle handelbaren Instrumente exklusive strukturierte Produkte
-Xetra (XETR): 05 Mai 2017 02:00
-Börse Frankfurt (XFRA): 05 Mai 2017 01:58
-```
-- Hier ist das passende Regex Beispiel:
-```
-  "Rel": "\\s*(Alle handelbaren Instrumente exklusive strukturierte Produkte\\sXetra \\(XETR\\):\\s*\\d\\d [a-zA-Z]+ \\d\\d\\d\\d \\d\\d:\\d\\d)\\s(B\\p{L}rse Frankfurt \\(XFRA\\):\\s*\\d\\d [a-zA-Z]+ \\d\\d\\d\\d \\d\\d:\\d\\d)\s*",
-```
-'Achtumg:!' Backslash muss jeweils immer doppelt angegeben werden, da es sich um ein Java Programm handelt und Backslash in Java ein escape Zeichen ist. Außerdem ist auf Sonderzeichen wie Umlaut zu achten. Wie Sie sehen wird so aus Börse -> B\\p{L}rse.
-5. Passen Sie das File-Ending an, ist Ihre Datei eine csv Datei so geben sie das passend an:
-´´´
-  "Ending": ".csv",
-´´´
-
-Weitere Informationen zur Steuerung über die Config finden Sie weiter unten.
 
 ## API Reference
 
-- Gson: laden der Config-File (Json-Format)
-- Jsoup: parsen von HTML
+- Gson: working with config file (it's written as  a Json-Object)
+- Jsoup: parsing of HTML
 
 ## Tests
 
 todo
 
-## Ausführung
-
-```
-...>java -jar Loader.jar hiesp.conf
-```
-
 ## Config
 
-Bei der Config handelt es sich um ein Json Object:
+Config is written as a Json-Object, here is an example:
 ```
 {
   "debug": true,
@@ -73,14 +45,20 @@ Bei der Config handelt es sich um ein Json Object:
   ]
 }
 ```  
-| Variable      | Erklärung |
+Definition of these Values:
+
+| variable      | explanation |
 | ------------- | --------- |
-| debug | Steuert ob gewisse prints ausgeführt werden sollen  |
-| Path  | Das Verzeichnis zum Download  |
-| FileName  | unter welchen Namen wird die Datei abgespeichert |
-| Ending  | filename extension / Dateinamenserweiterung |
-| WebSite  | auf welcher Webseite befindet sich die Datei |
-| Rel  | Regex für den Text, der mit der Date verknüpft ist |
-| logName  | momentan nicht in Benutzung |
-| DateRegex  | Regex für das Datum, befindlich im Text |
-| dateOrder  | Hier kann das Datum umformatiert werden (yyy_mm_dd) |
+| debug | switches some prints on and off (debug prints) |
+| Path  | destination of your download |
+| FileName  | under which name this file should be stored |
+| Ending  | filename extension |
+| WebSite  | website of your wanted file |
+| Rel  | Regex representing the text which is connected to the download |
+| logName  | currently obsolete |
+| DateRegex  | Regex representing the date |
+| dateOrder  | changes the date order, you can choose whether it's yyyymmdd or ddmmyyy |
+
+Attention! : 
+- Since this program is written in Java, you have to use doubled backslashes instead of single ones, cause it's an escape character in Java.
+- Be carefull with special characters like: { ä, ö, ü, Ä, Ö, Ü} when using regex. It's recommended to test your Regex in a simple Java program, runnning from console before using your Regex with this program.
