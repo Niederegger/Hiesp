@@ -1,11 +1,14 @@
 *.class
 bin/
+loader/preCompiled/Destination/
+converter/target/
+
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
-#*.jar
+*.jar
 *.war
 *.ear
 

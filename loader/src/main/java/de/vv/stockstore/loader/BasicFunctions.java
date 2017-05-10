@@ -51,18 +51,6 @@ public class BasicFunctions {
 	}
 
 	/**
-	 * prints String in wanted format (basically just uses String.format())
-	 * 
-	 * @param msg
-	 *            - String format msg
-	 * @param args
-	 *            - objects into format
-	 */
-	public static void print(String msg, Object... args) {
-		System.out.println(String.format(msg, args));
-	}
-
-	/**
 	 * parses message and return first result matching pattern
 	 * 
 	 * @param message

@@ -12,9 +12,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Download {
-
+	final static Logger logger = LoggerFactory.getLogger(Download.class);
 	/**
 	 * saveUrl: this Function is used to download a file from specified url to
 	 * your wanted path
@@ -62,7 +64,7 @@ public class Download {
 	 */
 	public static Link[] grabLink(String url, String regex, String ending) {
 		Vector<Link> LinkArray = new Vector<Link>();
-		BasicFunctions.print("Fetching %s...", url);
+		logger.info("Fetching {}...", url);
 		Document doc;
 		try {
 			doc = Jsoup.connect(url).get();
@@ -81,7 +83,7 @@ public class Download {
 					
 			}
 		} catch (IOException e) {
-			System.err.println("IOException: " + e.getMessage());
+			logger.error("IOException: {}", e.getMessage());
 			e.printStackTrace();
 		}
 		return LinkArray.toArray(new Link[LinkArray.size()]);

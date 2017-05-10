@@ -1,5 +1,7 @@
 package de.vv.stockstore.loader;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * @author Alexey Gasevic
  */
@@ -23,7 +25,6 @@ public class Link {
 		this.url = url;
 		this.rel = rel;
 		rawDate = BasicFunctions.match(rel, Loader.config.DateRegex);
-		System.out.println(rawDate);
 		convertDate();
 	}
 

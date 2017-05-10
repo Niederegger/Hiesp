@@ -5,6 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -12,13 +15,13 @@ import com.google.gson.JsonSyntaxException;
 public class Loader {
 
 	static Config config = new Config();
+	final static Logger logger = LoggerFactory.getLogger(Loader.class);
 
 	public static void main(String[] args) {
 		// das Programm erwartet genau ein Argument:
 		// den Pfad der Config
 		if (args.length <= 0 || args.length > 1) {
-			System.err.println("Use this Programm like this: java -jar hiesp.jar "
-					+ "'Path of config'. Config Files end have the eding .conf");
+			logger.error("Invalid amount of arguments: {}", args.length);
 			return;
 		} else {
 			// es wurde der Cnfig Pfad uebergeben:
@@ -30,10 +33,10 @@ public class Loader {
 					// nun kann versucht werden die Datei zu laden
 					loadData();
 				} else { 
-					System.err.println("This Config file doesn't fit the definition.");
+					logger.error("Invalid Config: {}",file);
 				} 
 			} else {
-				System.err.println("This Config file doesn't exists: " + file + ".");
+				logger.error("Invalid Config path and/or name: {}",file);
 			}
 		}
 	}
@@ -48,24 +51,24 @@ public class Loader {
 		if (links.length > 0) { // falls mindestens ein Link gefunden wurde
 			// Programm Start
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			System.out.println("Start: " + timestamp.toString()); //
+			logger.info("Start time: {}", timestamp.toString());
 			String storePath = BasicFunctions.getStorePath(links[0]);
 			// Bildung des Dateinamens
 			String fileName = BasicFunctions.getFileName(links[0]);
-			System.out.println(storePath); // COnsole Store Print
+			logger.info("Storing file to: {}", storePath);
 			// Exestiert diese File bereits?
 			if (!BasicFunctions.containsFile(config.Path, fileName)) {
 				saveFile(storePath, links); // Ausfuehrung des Downloads
 			} else {
 				// Printe dass diese Datei bereits in diesem Pfad exestiert
-				System.out.println("File was already Downloaded");
+				logger.info("File was alread downloaded: {}",fileName);
 			}
 			// Abschluss
 			timestamp = new Timestamp(System.currentTimeMillis()); //
-			System.out.println("End: " + timestamp.toString());
+			logger.info("End time: {}.", timestamp.toString());
 
 		} else {
-			System.err.println("Error: no links found!");
+			logger.error("No Links found on site: {}", config.WebSite + ", regex: " + config.Rel + "");
 		}
 
 	}
@@ -79,11 +82,10 @@ public class Loader {
 	 */
 	public static void saveFile(String file, Link[] links) {
 		try {
-			System.out.println(links[0].url);
+			logger.info("Found Url: {}", links[0].url);
 			Download.saveUrl(file, links[0].url); // hier geschieht der download
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
+			logger.error("IOException: {}",e.getMessage());
 		}
 	}
 
@@ -93,9 +95,9 @@ public class Loader {
 	static void debugLinks(Link[] links) {
 		if (config.debug) {
 			if (links != null) {
-				System.out.println("Links grabbed: " + links.length);
+				logger.info("Links grabbed: {}", links.length);
 				for (Link l : links) {
-					System.out.println(l);
+					logger.info("Link: {}",l.toString());
 				}
 			}
 		}
@@ -113,14 +115,14 @@ public class Loader {
 				// in ein Config Object konvertiert
 			config = gson.fromJson(new FileReader(file), Config.class);
 			if (config.debug)
-				System.out.println(config);
+				logger.info(config.toString());
 			return true;
 		} catch (JsonSyntaxException e) {
-			System.err.println("JsonSyntaxException: " + e.getMessage());
+			logger.error("JsonSyntaxException: {}",e.getMessage());
 		} catch (JsonIOException e) {
-			System.err.println("JsonIOException: " + e.getMessage());
+			logger.error("JsonIOException: {}",e.getMessage());
 		} catch (FileNotFoundException e) {
-			System.err.println("FileNotFoundException: " + e.getMessage());
+			logger.error("FileNotFoundException: {}",e.getMessage());
 		}
 		return false;
 	}
