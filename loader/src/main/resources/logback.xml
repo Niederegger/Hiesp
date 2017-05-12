@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<property name="DEV_HOME" value="./log" />
+	<property name="DEV_HOME" value="./log_Loader" />
 
-	<appender name="FILE-AUDIT"
+	<appender name="FILE-INSERT-INFO"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+		</filter>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>DENY</onMatch>
+		</filter>
 		<file>${DEV_HOME}/loader.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
 				%d{yyyy-MM-dd HH:mm:ss} - %-5level %logger{36} - %msg%n
 			</Pattern>
 		</encoder>
-
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- rollover daily -->
-			<fileNamePattern>${DEV_HOME}/archived/debug.%d{yyyy-MM-dd}.%i.log
-                        </fileNamePattern>
+			<fileNamePattern>${DEV_HOME}/archived/INFO.%d{yyyy-MM-dd}.%i.log.zip
+			</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy
 				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>10MB</maxFileSize>
@@ -24,13 +31,12 @@
 
 	</appender>
 
-	<logger name="de.vv.test" level="debug"
-		additivity="false">
+	<logger name="com.mkyong.web" level="debug" additivity="false">
 		<appender-ref ref="FILE-AUDIT" />
 	</logger>
- 
-	<root level="error">
-		<appender-ref ref="FILE-AUDIT" />
+
+	<root level="TRACE">
+		<appender-ref ref="FILE-INSERT-INFO" />
 	</root>
 
 </configuration>

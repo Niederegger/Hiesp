@@ -3,7 +3,6 @@ package de.vv.stockstore.loader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,14 +11,20 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.util.StatusPrinter;
+
 public class Loader {
+	final static Logger logger = LoggerFactory.getLogger(Loader.class);
 
 	static Config config = new Config();
-	final static Logger logger = LoggerFactory.getLogger(Loader.class);
 
 	public static void main(String[] args) {
 		// das Programm erwartet genau ein Argument:
 		// den Pfad der Config
+	    LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+	    // print logback's internal status
+	    StatusPrinter.print(lc);
 		if (args.length <= 0 || args.length > 1) {
 			logger.error("Invalid amount of arguments: {}", args.length);
 			return;
@@ -49,9 +54,7 @@ public class Loader {
 		// Suche auf der Website nach Links die auf das RelRegex passen
 		Link[] links = Download.grabLink(config.WebSite, config.Rel, config.Ending);
 		if (links.length > 0) { // falls mindestens ein Link gefunden wurde
-			// Programm Start
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			logger.info("Start time: {}", timestamp.toString());
+			logger.info("Loader start.");// Programm Start
 			String storePath = BasicFunctions.getStorePath(links[0]);
 			// Bildung des Dateinamens
 			String fileName = BasicFunctions.getFileName(links[0]);
@@ -63,12 +66,10 @@ public class Loader {
 				// Printe dass diese Datei bereits in diesem Pfad exestiert
 				logger.info("File was alread downloaded: {}",fileName);
 			}
-			// Abschluss
-			timestamp = new Timestamp(System.currentTimeMillis()); //
-			logger.info("End time: {}.", timestamp.toString());
+			logger.info("Loader end.");// Abschluss
 
 		} else {
-			logger.error("No Links found on site: {}", config.WebSite + ", regex: " + config.Rel + "");
+			logger.error("No Links found on site: {}, rel {}", config.WebSite, config.Rel);
 		}
 
 	}

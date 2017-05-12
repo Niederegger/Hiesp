@@ -1,7 +1,5 @@
 package de.vv.stockstore.loader;
 
-import ch.qos.logback.classic.Logger;
-
 /**
  * @author Alexey Gasevic
  */
