@@ -5,6 +5,17 @@ This project is supposed to be used as a download tool. Loader listens to Config
 
 ## Installation
 
+Using Maven:
+Compiling with Maven:
+Enter Folder and use this command to compile
+```
+mvn clean package
+```
+clean deletes old compilations, package creates an executable jar
+if you want to run this program, copy the executable jar and folder 'dependency-jars' into your destinated location
+further follow old steps
+
+Old version:
 You can find a precompiled version here: 'Loader/loader/preCompiled/'. Follow the next steps to run this program:
 1. Use the precompiled Jar or compile your own one.
 2. Choose a directory for your downloads.
