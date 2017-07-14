@@ -1,5 +1,9 @@
 package de.vv.stockstore.loader;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author Alexey Gasevic
  */
@@ -22,8 +26,14 @@ public class Link {
 	public Link(String url, String rel) {
 		this.url = url;
 		this.rel = rel;
-		rawDate = BasicFunctions.match(rel, Loader.config.DateRegex);
-		convertDate();
+		if (Loader.config.hasDate) {
+			rawDate = BasicFunctions.match(rel, Loader.config.DateRegex);
+			convertDate();
+		} else {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
+			Date currentDate = new Date();
+			date = dateFormat.format(currentDate);
+		}
 	}
 
 	/**

@@ -20,6 +20,8 @@ public class Config {
 	public String DateRegex; // in welchem format ist das datum in der
 								// relationellen text geschrieben
 	public int[] dateOrder; // damit ist es moeglich das datumsformat zu aendern
+	
+	boolean hasDate;
 
 	/**
 	 * diese funktion dient der ueberpruefung welche einstellung die config
@@ -36,7 +38,7 @@ public class Config {
 		sb.append("Rel: " + Rel + "\n");
 		sb.append("logName: " + logName + "\n");
 		sb.append("DateRegex: " + DateRegex + "\n");
-
+		sb.append("hasDate: " + hasDate);
 		sb.append("dateOrder: {");
 		for (int od : dateOrder) {
 			sb.append(od + ",");

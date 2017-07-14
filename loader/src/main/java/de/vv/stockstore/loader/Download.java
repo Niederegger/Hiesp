@@ -75,11 +75,11 @@ public class Download {
 			for (Element link : links) {												// geht alle Elemente durch
 				currentRel = link.text();	
 				curl = link.attr("abs:href");
-				if (curl.endsWith(ending)){												// endet diese Url mit dem erwuenschten DateiTp?
+//				if (curl.endsWith(ending)){												// endet diese Url mit dem erwuenschten DateiTp?
 					if(p.matcher(currentRel).matches()){								// stimmt das pattern des Textes mit dem gewuenschten Text ueberein?
 						LinkArray.add(new Link(curl, currentRel));						// dann behalte diesen link
 					}
-				}
+//				}
 					
 			}
 		} catch (IOException e) {

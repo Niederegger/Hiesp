@@ -85,6 +85,12 @@ public class Loader {
 		try {
 			logger.info("Found Url: {}", links[0].url);
 			Download.saveUrl(file, links[0].url); // hier geschieht der download
+			if(config.Ending.toLowerCase().equals(".zip")){
+				String to = file.split("\\.")[0] + ".txt";
+				BasicFunctions.unZip(file, to, true);
+			} else {
+				System.out.println("no Zip: " + config.Ending);
+			}
 		} catch (IOException e) {
 			logger.error("IOException: {}",e.getMessage());
 		}

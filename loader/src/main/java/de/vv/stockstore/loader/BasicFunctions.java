@@ -3,6 +3,11 @@ package de.vv.stockstore.loader;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * 
@@ -59,14 +64,14 @@ public class BasicFunctions {
 	 *            - pattern
 	 */
 	public static String match(String message, String regex) {
-		Pattern p = Pattern.compile(regex); 
+		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(message);
 		if (m.find()) {
 			return m.group(0);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * checks whether this path contains a file or not
 	 * 
@@ -76,44 +81,69 @@ public class BasicFunctions {
 	 */
 	public static boolean containsFile(String path, String file) {
 		File folder = new File(path); // hole mir diesen order des Pfades
-		File[] listOfFiles = folder.listFiles(); // hole mir alle Dateien aus diesem Pfad
-		for (int i = 0; i < listOfFiles.length; i++) {	// schau dir all diese Dateien an
+		File[] listOfFiles = folder.listFiles(); // hole mir alle Dateien aus
+													// diesem Pfad
+		for (int i = 0; i < listOfFiles.length; i++) { // schau dir all diese
+														// Dateien an
 			if (listOfFiles[i].isFile()) { // falls die Datei eine Datei ist
-				if (listOfFiles[i].getName().equals(file)) // und genauso heisst wie die gewuenschte Datei
+				if (listOfFiles[i].getName().equals(file)) // und genauso heisst
+															// wie die
+															// gewuenschte Datei
 					return true; // wird true ausgegeben
 			}
 		}
 		return false; // ansonsten false
 	}
-	
-//	/**
-//	 * initial Config, is used to print Config as Json format
-//	 * @return
-//	 */
-//	public static Config initConfig(){
-//		Config c = new Config();
-//		c.debug = true;
-//		c.Path = "D:\\Alexey\\HIESP\\";
-//		c.FileName = "HIESP";
-//		c.Ending = ".csv";
-//		c.WebSite = "http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt";
-//		c.Rel = "Alle handelbaren Instrumente exklusive strukturierte Produkte";
-//		c.logName = "log.txt";
-//		c.DateRegex = "\\d\\d [a-zA-Z]+ \\d\\d\\d\\d \\d\\d:\\d\\d";
-//		c.dateOrder = new int[]{2,1,0,3,4};
-//		return c;
-//	}
-	
+
 	/**
-	 * Checks whether the config file has the right ending and exists or not 
-	 * @param path - path to config file
+	 * Checks whether the config file has the right ending and exists or not
+	 * 
+	 * @param path
+	 *            - path to config file
 	 * @return boolean
 	 */
-	public static boolean checkConfigPath(String path){
-		if(path.endsWith(".conf")){
+	public static boolean checkConfigPath(String path) {
+		if (path.endsWith(".conf")) {
 			File f = new File(path);
-			return (f.exists() && !f.isDirectory()); // ist diese File eine File und kein Ordner
+			return (f.exists() && !f.isDirectory()); // ist diese File eine File
+														// und kein Ordner
 		}
 		return false;
+	}
+
+	public static void unZip(String from, String to, boolean deleteFrom) {
+		byte[] buffer = new byte[1024];
+
+		try {
+
+			// get the zip file content
+			ZipInputStream zis = new ZipInputStream(new FileInputStream(from));
+			// get the zipped file list entry
+			ZipEntry ze = zis.getNextEntry();
+
+			while (ze != null) {
+
+				File newFile = new File(to);
+
+				FileOutputStream fos = new FileOutputStream(newFile);
+
+				int len;
+				while ((len = zis.read(buffer)) > 0) {
+					fos.write(buffer, 0, len);
+				}
+
+				fos.close();
+				ze = null;
+			}
+
+			zis.closeEntry();
+			zis.close();
+
+			if(deleteFrom){
+				new File(from).delete();
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 }
