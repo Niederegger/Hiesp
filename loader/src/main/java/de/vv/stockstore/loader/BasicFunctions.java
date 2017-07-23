@@ -24,9 +24,9 @@ public class BasicFunctions {
 	 *            - Link
 	 * @return
 	 */
-	public static String getStorePath(Link l) {
-		return Loader.config.Path + getFileName(l);
-	}
+//	public static String getStorePath(Link l) {
+//		return Loader.config.Path + getFileName(l);
+//	}
 
 	/**
 	 * formats FileName
@@ -35,9 +35,9 @@ public class BasicFunctions {
 	 *            - Link
 	 * @return
 	 */
-	public static String getFileName(Link l) {
-		return Loader.config.FileName + "_" + l.date + Loader.config.Ending;
-	}
+//	public static String getFileName(Link l) {
+//		return Loader.config.FileName + "_" + l.date + Loader.config.Ending;
+//	}
 
 	/**
 	 * use trim to cut your String to a wished width
@@ -73,26 +73,22 @@ public class BasicFunctions {
 	}
 
 	/**
-	 * checks whether this path contains a file or not
+	 * checks whether this path contains the given filename or not
 	 * 
 	 * @param path
 	 * @param file
 	 * @return boolean
 	 */
 	public static boolean containsFile(String path, String file) {
-		File folder = new File(path); // hole mir diesen order des Pfades
-		File[] listOfFiles = folder.listFiles(); // hole mir alle Dateien aus
-													// diesem Pfad
-		for (int i = 0; i < listOfFiles.length; i++) { // schau dir all diese
-														// Dateien an
-			if (listOfFiles[i].isFile()) { // falls die Datei eine Datei ist
-				if (listOfFiles[i].getName().equals(file)) // und genauso heisst
-															// wie die
-															// gewuenschte Datei
-					return true; // wird true ausgegeben
+		File folder = new File(path);                     // hole mir diesen Ordner des Pfades
+		File[] listOfFiles = folder.listFiles();          // hole mir alle Dateien aus diesem Ordner
+		for (int i = 0; i < listOfFiles.length; i++) {    // schau dir all diese Dateien an
+			if (listOfFiles[i].isFile()) {                  // falls die Datei eine Datei ist
+				if (listOfFiles[i].getName().equals(file))    // und genauso heisst wie die gewuenschte Datei
+					return true;                                // wird true ausgegeben
 			}
 		}
-		return false; // ansonsten false
+		return false;                                     // alles durch und nichts gefunden: false zurück geben
 	}
 
 	/**
@@ -105,8 +101,7 @@ public class BasicFunctions {
 	public static boolean checkConfigPath(String path) {
 		if (path.endsWith(".conf")) {
 			File f = new File(path);
-			return (f.exists() && !f.isDirectory()); // ist diese File eine File
-														// und kein Ordner
+			return (f.exists() && !f.isDirectory());        // die Datei existiert und ist kein Ordner
 		}
 		return false;
 	}
@@ -115,14 +110,10 @@ public class BasicFunctions {
 		byte[] buffer = new byte[1024];
 
 		try {
-
-			// get the zip file content
-			ZipInputStream zis = new ZipInputStream(new FileInputStream(from));
-			// get the zipped file list entry
-			ZipEntry ze = zis.getNextEntry();
+			ZipInputStream zis = new ZipInputStream(new FileInputStream(from));    // get the zip file content
+			ZipEntry ze = zis.getNextEntry();                                      // get the zipped file list entry
 
 			while (ze != null) {
-
 				File newFile = new File(to);
 
 				FileOutputStream fos = new FileOutputStream(newFile);
