@@ -37,8 +37,8 @@ public class App {
 		}
 
 		String file = BasicFunctions.getStorePath(BasicFunctions.getFileName(links[0]));
-		logger.info("Loader start. Found Url: {}", links[0].url);													// loggt url
-		logger.info("Storing file to: {}", file);																					// loggt dateiPfad
+		logger.info("Loader start. Found Url: {}", links[0].url);														// loggt url
+		logger.info("Storing file to: {}", file);																						// loggt dateiPfad
 
 		try {																																								// startet den Download Prozess
 

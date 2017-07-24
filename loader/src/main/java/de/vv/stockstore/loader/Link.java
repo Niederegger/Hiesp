@@ -40,7 +40,7 @@ public class Link {
 	 * contained in Config
 	 */
 	void convertDate() {
-		if (rawDate == null) {
+		if (rawDate != null) {
 			String[] dateSplitted = rawDate.split(" ");
 			if (!(dateSplitted.length > 0)) {
 			}

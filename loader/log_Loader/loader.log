@@ -333,3 +333,69 @@ hasDate: falsedateOrder: {2,1,0,3,4,}
 2017-07-24 12:02:58 - INFO  de.vv.stockstore.loader.WebFunctions - Fetching http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt...
 2017-07-24 12:02:59 - INFO  de.vv.stockstore.loader.App - Loader start. Found Url: http://www.xetra.com/blob/1424940/00d76f0c6a17fbb9f99c5018a61cfc1c/data/allTradableInstruments.csv
 2017-07-24 12:02:59 - INFO  de.vv.stockstore.loader.App - Storing file to: D:\StockStore\Data\allTradableInstruments_2017_07_24.csv
+2017-07-24 12:21:58 - INFO  de.vv.stockstore.loader.App - debug: true
+Path: D:\StockStore\Data\
+FileName: allTradableInstruments
+Ending: .csv
+WebSite: http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt
+Rel: \s*(Alle handelbaren Instrumente exklusive strukturierte Produkte)\s*(.*) \d\d\s(.*)\s\d\d\d\d\s\d\d:\d\d\s*
+DateRegex: \d\d [a-zA-Z]+ \d\d\d\d \d\d:\d\d
+hasDate: truedateOrder: {2,1,0,3,4,}
+2017-07-24 12:21:58 - INFO  de.vv.stockstore.loader.WebFunctions - Fetching http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt...
+2017-07-24 12:21:59 - INFO  de.vv.stockstore.loader.App - Loader start. Found Url: http://www.xetra.com/blob/1424940/00d76f0c6a17fbb9f99c5018a61cfc1c/data/allTradableInstruments.csv
+2017-07-24 12:21:59 - INFO  de.vv.stockstore.loader.App - Storing file to: D:\StockStore\Data\allTradableInstruments_null.csv
+2017-07-24 12:22:57 - INFO  de.vv.stockstore.loader.App - debug: true
+Path: D:\StockStore\Data\
+FileName: allTradableInstruments
+Ending: .csv
+WebSite: http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt
+Rel: \s*(Alle handelbaren Instrumente exklusive strukturierte Produkte)\s*(.*) \d\d\s(.*)\s\d\d\d\d\s\d\d:\d\d\s*
+DateRegex: \d\d [a-zA-Z]+ \d\d\d\d \d\d:\d\d
+hasDate: truedateOrder: {2,1,0,3,4,}
+2017-07-24 12:22:57 - INFO  de.vv.stockstore.loader.WebFunctions - Fetching http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt...
+2017-07-24 12:22:58 - INFO  de.vv.stockstore.loader.App - Loader start. Found Url: http://www.xetra.com/blob/1424940/00d76f0c6a17fbb9f99c5018a61cfc1c/data/allTradableInstruments.csv
+2017-07-24 12:22:58 - INFO  de.vv.stockstore.loader.App - Storing file to: D:\StockStore\Data\allTradableInstruments_null.csv
+2017-07-24 12:23:51 - INFO  de.vv.stockstore.loader.App - debug: true
+Path: D:\StockStore\Data\
+FileName: allTradableInstruments
+Ending: .csv
+WebSite: http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt
+Rel: \s*(Alle handelbaren Instrumente exklusive strukturierte Produkte)\s*(.*) \d\d\s(.*)\s\d\d\d\d\s\d\d:\d\d\s*
+DateRegex: \d\d [a-zA-Z]+ \d\d\d\d \d\d:\d\d
+hasDate: truedateOrder: {2,1,0,3,4,}
+2017-07-24 12:23:51 - INFO  de.vv.stockstore.loader.WebFunctions - Fetching http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt...
+2017-07-24 12:23:52 - INFO  de.vv.stockstore.loader.App - Loader start. Found Url: http://www.xetra.com/blob/1424940/00d76f0c6a17fbb9f99c5018a61cfc1c/data/allTradableInstruments.csv
+2017-07-24 12:23:52 - INFO  de.vv.stockstore.loader.App - Storing file to: D:\StockStore\Data\allTradableInstruments_null.csv
+2017-07-24 12:24:12 - INFO  de.vv.stockstore.loader.App - debug: true
+Path: D:\StockStore\Data\
+FileName: allTradableInstruments
+Ending: .csv
+WebSite: http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt
+Rel: \s*(Alle handelbaren Instrumente exklusive strukturierte Produkte)\s*(.*) \d\d\s(.*)\s\d\d\d\d\s\d\d:\d\d\s*
+DateRegex: \d\d [a-zA-Z]+ \d\d\d\d \d\d:\d\d
+hasDate: truedateOrder: {2,1,0,3,4,}
+2017-07-24 12:24:12 - INFO  de.vv.stockstore.loader.WebFunctions - Fetching http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt...
+2017-07-24 12:24:13 - INFO  de.vv.stockstore.loader.App - Loader start. Found Url: http://www.xetra.com/blob/1424940/00d76f0c6a17fbb9f99c5018a61cfc1c/data/allTradableInstruments.csv
+2017-07-24 12:24:13 - INFO  de.vv.stockstore.loader.App - Storing file to: D:\StockStore\Data\allTradableInstruments_2017_Juli_22_03_40.csv
+2017-07-24 12:24:23 - INFO  de.vv.stockstore.loader.App - debug: true
+Path: D:\StockStore\Data\
+FileName: allTradableInstruments
+Ending: .csv
+WebSite: http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt
+Rel: \s*(Alle handelbaren Instrumente exklusive strukturierte Produkte)\s*(.*) \d\d\s(.*)\s\d\d\d\d\s\d\d:\d\d\s*
+DateRegex: \d\d [a-zA-Z]+ \d\d\d\d \d\d:\d\d
+hasDate: truedateOrder: {2,1,0,3,4,}
+2017-07-24 12:24:23 - INFO  de.vv.stockstore.loader.WebFunctions - Fetching http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt...
+2017-07-24 12:24:24 - INFO  de.vv.stockstore.loader.App - Loader start. Found Url: http://www.xetra.com/blob/1424940/00d76f0c6a17fbb9f99c5018a61cfc1c/data/allTradableInstruments.csv
+2017-07-24 12:24:24 - INFO  de.vv.stockstore.loader.App - Storing file to: D:\StockStore\Data\allTradableInstruments_2017_Juli_22_03_40.csv
+2017-07-24 12:25:14 - INFO  de.vv.stockstore.loader.App - debug: true
+Path: D:\StockStore\Data\
+FileName: allTradableInstruments
+Ending: .csv
+WebSite: http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt
+Rel: \s*(Alle handelbaren Instrumente exklusive strukturierte Produkte)\s*(.*) \d\d\s(.*)\s\d\d\d\d\s\d\d:\d\d\s*
+DateRegex: \d\d [a-zA-Z]+ \d\d\d\d \d\d:\d\d
+hasDate: truedateOrder: {2,1,0,3,4,}
+2017-07-24 12:25:14 - INFO  de.vv.stockstore.loader.WebFunctions - Fetching http://www.xetra.com/xetra-de/instrumente/alle-handelbaren-instrumente/boersefrankfurt...
+2017-07-24 12:25:15 - INFO  de.vv.stockstore.loader.App - Loader start. Found Url: http://www.xetra.com/blob/1424940/00d76f0c6a17fbb9f99c5018a61cfc1c/data/allTradableInstruments.csv
+2017-07-24 12:25:15 - INFO  de.vv.stockstore.loader.App - Storing file to: D:\StockStore\Data\allTradableInstruments_2017_Juli_22_03_40.csv
