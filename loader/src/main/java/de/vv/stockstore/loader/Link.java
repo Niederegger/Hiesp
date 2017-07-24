@@ -8,13 +8,12 @@ import java.util.Date;
  * @author Alexey Gasevic
  */
 public class Link {
-	public String url; // Url of this link
-	public String rel; // The Clickable Text of this Link (seen at website)
-	public String rawDate; // Raw Date of this rel
-	public String date; // Formatted Date
+	public String url; 			// Url of this link
+	public String rel; 			// The Clickable Text of this Link (seen at website)
+	public String rawDate; 	// Raw Date of this rel
+	public String date; 		// Formatted Date
 
-	public Link() {
-	}
+	public Link() {}
 
 	/**
 	 * erstellt ein object link, welches einer url einen Text zuweißt, welcher
@@ -26,8 +25,8 @@ public class Link {
 	public Link(String url, String rel) {
 		this.url = url;
 		this.rel = rel;
-		if (Loader.config.hasDate) {
-			rawDate = BasicFunctions.match(rel, Loader.config.DateRegex);
+		if (App.config.useWebsiteDate) {
+			rawDate = BasicFunctions.match(rel, App.config.DateRegex);
 			convertDate();
 		} else {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
@@ -41,18 +40,18 @@ public class Link {
 	 * contained in Config
 	 */
 	void convertDate() {
-		if (rawDate != null) {
-			String[] snipped = rawDate.split(" ");
-			if (snipped.length > 0) {
-				date = "";
-				String s;
-				for (int i : Loader.config.dateOrder) {
-					if (i >= 0 && i < snipped.length) {
-						s = snipped[i];
-						if (s.contains(":"))
-							s = s.replace(':', '_');
-						date += s + (i != snipped.length - 1 ? "_" : "");
-					}
+		if (rawDate == null) {
+			String[] dateSplitted = rawDate.split(" ");
+			if (!(dateSplitted.length > 0)) {
+			}
+			date = "";
+			String datePart;
+			for (int i : App.config.dateOrder) {
+				if (i >= 0 && i < dateSplitted.length) {
+					datePart = dateSplitted[i];
+					if (datePart.contains(":"))
+						datePart = datePart.replace(':', '_');
+					date += datePart + (i != dateSplitted.length - 1 ? "_" : "");
 				}
 			}
 		}

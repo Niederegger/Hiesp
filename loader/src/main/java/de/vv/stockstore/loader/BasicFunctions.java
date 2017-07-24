@@ -5,73 +5,75 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import com.google.gson.Gson;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * 
- * @author Alexey Gasevic
- *
  *         This class is used to bundle basic functions needed for this project
  */
 public class BasicFunctions {
 
+	//--------------------------------------------------------------------------------------------------------------------
+	// Config
+	//--------------------------------------------------------------------------------------------------------------------
+	
 	/**
-	 * StorePath: return the storepath for this link
+	 * initialisiert die Config Datei
 	 * 
-	 * @param l
-	 *            - Link
-	 * @return
+	 * @param file
+	 * @return true bei Erfolg, false bei Fehler
 	 */
-//	public static String getStorePath(Link l) {
-//		return Loader.config.Path + getFileName(l);
-//	}
+	public static boolean initConfig(String file) {
 
-	/**
-	 * formats FileName
-	 * 
-	 * @param l
-	 *            - Link
-	 * @return
-	 */
-//	public static String getFileName(Link l) {
-//		return Loader.config.FileName + "_" + l.date + Loader.config.Ending;
-//	}
-
-	/**
-	 * use trim to cut your String to a wished width
-	 * 
-	 * @param s
-	 *            - your String
-	 * @param width
-	 *            - wanted width
-	 * @return cutted String to less or equal width
-	 */
-	public static String trim(String s, int width) {
-		if (s.length() > width)
-			return s.substring(0, width - 1);
-		else
-			return s;
-	}
-
-	/**
-	 * parses message and return first result matching pattern
-	 * 
-	 * @param message
-	 *            - some message
-	 * @param p
-	 *            - pattern
-	 */
-	public static String match(String message, String regex) {
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(message);
-		if (m.find()) {
-			return m.group(0);
+		if (!checkConfigPath(file)) {                        // ueberpruefe ob config exestiert
+			App.logger.error("Invalid Config path and/or name: {}", file);
+			return false;
 		}
-		return null;
+
+		Gson gson = new Gson();
+		try {  																															// lade das Json Object aus der Text Datei in die config-Variable
+			App.config = gson.fromJson(new FileReader(file), Config.class);		// setzt die config-Variable in App.config
+			if (App.config.debug)
+				App.logger.info(App.config.toString());
+			return true;
+		} catch (Exception e) {
+			App.logger.error("Exception: {}", e.getMessage());
+		}
+		return false;																												// Config konnte nicht erstellt werden
+	}
+	
+	/**
+	 * Checks whether the config file has the right ending and exists or not
+	 * 
+	 * @param path
+	 *          - path to config file
+	 * @return boolean
+	 */
+	public static boolean checkConfigPath(String path) {
+		if (path.endsWith(".conf")) {
+			File f = new File(path);
+			return (f.exists() && !f.isDirectory());        // die Datei existiert und ist kein Ordner
+		}
+		return false;
+	}
+	
+	//--------------------------------------------------------------------------------------------------------------------
+	// Path
+	//--------------------------------------------------------------------------------------------------------------------
+	
+	public static String getStorePath(String fileName) {
+		return App.config.Path + fileName;
 	}
 
+	public static String getFileName(Link link) {
+		return App.config.FileName + "_" + link.date + App.config.Ending;
+	}
+	
 	/**
 	 * checks whether this path contains the given filename or not
 	 * 
@@ -91,32 +93,70 @@ public class BasicFunctions {
 		return false;                                     // alles durch und nichts gefunden: false zurück geben
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------
+	// Strings
+	//--------------------------------------------------------------------------------------------------------------------
+	
+	
 	/**
-	 * Checks whether the config file has the right ending and exists or not
+	 * use trim to cut your String to a wished width
 	 * 
-	 * @param path
-	 *            - path to config file
-	 * @return boolean
+	 * @param s
+	 *          - your String
+	 * @param width
+	 *          - wanted width
+	 * @return cutted String to less or equal width
 	 */
-	public static boolean checkConfigPath(String path) {
-		if (path.endsWith(".conf")) {
-			File f = new File(path);
-			return (f.exists() && !f.isDirectory());        // die Datei existiert und ist kein Ordner
-		}
-		return false;
+	public static String trim(String s, int width) {
+		if (s.length() > width)
+			return s.substring(0, width - 1);
+		else
+			return s;
 	}
 
+	/**
+	 * parses message and return first result matching pattern
+	 * 
+	 * @param message
+	 *          - some message
+	 * @param p
+	 *          - pattern
+	 */
+	public static String match(String message, String regex) {
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(message);
+		if (m.find()) {
+			return m.group(0);
+		}
+		return null;
+	}
+
+	//--------------------------------------------------------------------------------------------------------------------
+	// Zip
+	//--------------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Da Struktierte Produkte eine File innerhalb einer Zip-Datei ist, wurde diese Funktion geschrieben um diese Text Datei direkt in
+	 * das Verzeichnis aus der Zip zu ziehen
+	 * 
+	 * @param from
+	 *          Zip-Datei
+	 * @param to
+	 *          entapckungsOrt + DateiNamen
+	 * @param deleteFrom
+	 *          True, wenn die Zip-Datei anschliessend gelöscht werden soll
+	 */
 	public static void unZip(String from, String to, boolean deleteFrom) {
 		byte[] buffer = new byte[1024];
 
 		try {
-			ZipInputStream zis = new ZipInputStream(new FileInputStream(from));    // get the zip file content
-			ZipEntry ze = zis.getNextEntry();                                      // get the zipped file list entry
+			ZipInputStream zis = new ZipInputStream(new FileInputStream(from));    // zis - ZipInputStream
+			ZipEntry ze = zis.getNextEntry();                                      // ze - ZipEntry
 
 			while (ze != null) {
 				File newFile = new File(to);
 
-				FileOutputStream fos = new FileOutputStream(newFile);
+				FileOutputStream fos = new FileOutputStream(newFile);		// fos - FileOutputStrem
 
 				int len;
 				while ((len = zis.read(buffer)) > 0) {
@@ -130,11 +170,29 @@ public class BasicFunctions {
 			zis.closeEntry();
 			zis.close();
 
-			if(deleteFrom){
+			if (deleteFrom) {								// Loesche die Zip-Datei wenn gewuenscht
 				new File(from).delete();
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
+		}
+	}
+
+	//--------------------------------------------------------------------------------------------------------------------
+	// Debug
+	//--------------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Diese Methode kann genutzt werden um alle Links printen zu lassen.
+	 */
+	static void debugLinks(Link[] links) {
+		if (App.config.debug) {
+			if (links != null) {
+				App.logger.info("Links grabbed: {}", links.length);
+				for (Link l : links) {
+					App.logger.info("Link: {}", l.toString());
+				}
+			}
 		}
 	}
 }

@@ -88,7 +88,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>de.vv.stockstore.loader.Loader</mainClass>
+							<mainClass>de.vv.stockstore.loader.App</mainClass>
 							<classpathPrefix>dependency-jars/</classpathPrefix>
 						</manifest>
 					</archive>
